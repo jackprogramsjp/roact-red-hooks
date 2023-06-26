@@ -8,11 +8,14 @@ local function createUseNetOn(useState, useEffect): (any, string) -> ...any
 
 		useEffect(function()
 			if Events[eventName] ~= nil then
+				table.insert(Events[eventName].onChanges, function()
+					setVariables(Events[eventName].values)
+				end)
+
 				return
 			end
 
 			Events[eventName] = {
-				event = nil,
 				values = {},
 				onChanges = {},
 			}
@@ -21,7 +24,7 @@ local function createUseNetOn(useState, useEffect): (any, string) -> ...any
 				setVariables(Events[eventName].values)
 			end)
 
-			Events[eventName].event = redNamespaceNet:On(eventName, function(...)
+			redNamespaceNet:On(eventName, function(...)
 				Events[eventName].values = { ... }
 				for _, onChange in Events[eventName].onChanges do
 					onChange()

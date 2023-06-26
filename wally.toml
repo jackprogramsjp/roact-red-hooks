@@ -1,0 +1,8 @@
+[package]
+name = "jackprogramsjp/roact-red-hooks"
+description = "An implementation of hooks for the Red, networking library, in Roact17"
+version = "0.1.0"
+license = "MIT"
+authors = ["JackProgramsJP"]
+realm = "shared"
+registry = "https://github.com/upliftgames/wally-index"
